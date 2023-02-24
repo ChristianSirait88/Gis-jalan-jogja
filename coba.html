@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaftlet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+</head>
+<style>
+    #map { height: 1080px; }
+</style>
+<body>
+    <div id="map"></div>
+</body>
+<script >
+    
+const tempat = L.layerGroup();
+
+const Kos = L.marker([-7.78108348954405, 110.41334283862504]).addTo(tempat);
+const Kampus = L.marker([-7.782446385534539, 110.415719893362989]).addTo(tempat);
+
+const mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+const mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+const streets = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+
+const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 20,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+
+const map = L.map('map', {
+    center: [-7.78108348954405, 110.41334283862504],
+    zoom: 17,
+    layers: [osm, tempat]
+});
+
+const baseLayers = {
+    'OpenStreetMap': osm,
+    'Streets': streets
+};
+
+const overlays = {
+    'tempat': tempat
+};
+
+const layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+const kos1 = L.marker([-7.766207916853856, 110.4087076371718]).bindPopup('ooyo');
+const kos2 = L.marker([-7.766390620400816, 110.4074791660811]).bindPopup('kos putri');
+
+const sewa = L.layerGroup([kos1, kos2]);
+
+const satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+layerControl.addBaseLayer(satellite, 'Satellite');
+layerControl.addOverlay(sewa, 'sewa');
+</script>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Jalan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+</head>
+<style>
+    #map { height: 650px; }
+</style>
+<body>
+    <div class="container">
+        <br />
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Jalan</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarText"
+              aria-controls="navbarText"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="jalan.html">Data Jalan</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About</a>
+                </li>
+              </ul>
+              <span class="navbar-text">
+                Made by Christian
+              </span>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <br><br>
+
+      <div class="container">
+        <div id="map"></div>
+      </div>
+      <br>
+</body>
+<script>
+ var map = L.map('map').setView([-7.801174760262455,110.35654349730424], 13);
+
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+var grojs={"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"coordinates":[[[110.35654349730424,-7.801174760262455],[110.35609491676729,-7.812885299982639],[110.36847574063472,-7.8145296379185964],[110.36908132441062,-7.801619188955186],[110.35654349730424,-7.801174760262455]]],"type":"Polygon"}},{"type":"Feature","properties":{},"geometry":{"coordinates":[[[110.3835983087024,-7.795148872376885],[110.38340306053294,-7.796447708279288],[110.383626201298,-7.796972768456897],[110.38482558291008,-7.796972768456897],[110.3851602940577,-7.796281899665232],[110.38490926069704,-7.794900158659303],[110.38435140878443,-7.7948172540539105],[110.3835983087024,-7.795148872376885]]],"type":"Polygon"}},{"type":"Feature","properties":{},"geometry":{"coordinates":[[[110.37518961628683,-7.814000550674834],[110.37509762022995,-7.814678417568359],[110.37517811677975,-7.814951842558401],[110.37530461135805,-7.814951842558401],[110.37535060938654,-7.814849308208096],[110.37567834534019,-7.814849308208096],[110.3757933404114,-7.81484361185457],[110.37589683597548,-7.814513223216721],[110.37629931872465,-7.814513223216721],[110.3763798152745,-7.8141372634142385],[110.37518961628683,-7.814000550674834]]],"type":"Polygon"}}]}
+
+L.geoJSON(grojs).addTo(map);
+
+const kraton = L.marker([-7.805299647749499, 110.3642116655132]).addTo(map).bindPopup('<b>Kraton Jogja</b><br />Hai Aku Kraton Jogja.').openPopup();;
+const alun = L.marker([-7.8039028088781395, 110.36438970081342]).addTo(map).bindPopup('<b>Alun-Alun</b><br />Hai Aku Alun-Alun.').openPopup();;
+const masjidGedhe = L.marker([-7.803939985578645, 110.36260091705017]).addTo(map).bindPopup('<b>Masjid Gedhe!</b><br />Hai Aku Masjid Gedhe').openPopup();;
+
+</script>
+</html>
